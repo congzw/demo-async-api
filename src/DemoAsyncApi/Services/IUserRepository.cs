@@ -7,6 +7,8 @@ namespace DemoAsyncApi.Services
 {
     public interface IUserRepository
     {
+        IEnumerable<User> GetUsers();
+        User GetUser(Guid id);
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserAsync(Guid id);
     }

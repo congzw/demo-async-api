@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DemoAsyncApi.Contexts;
 using DemoAsyncApi.Entities;
@@ -14,6 +15,16 @@ namespace DemoAsyncApi.Services
         public UserRepository(UserDbContext userDbContext)
         {
             _userDbContext = userDbContext ?? throw new ArgumentNullException(nameof(userDbContext));
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return _userDbContext.Users.ToList();
+        }
+
+        public User GetUser(Guid id)
+        {
+            return _userDbContext.Users.FirstOrDefault(u => u.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetUsersAsync()
